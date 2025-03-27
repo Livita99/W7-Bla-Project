@@ -23,4 +23,28 @@ class RidePreference {
         'arrival: ${arrival.name}, '
         'requestedSeats: $requestedSeats)';
   }
+
+  // Copy constructor
+  RidePreference.copy(RidePreference other)
+      : departure = other.departure,
+        departureDate = other.departureDate,
+        arrival = other.arrival,
+        requestedSeats = other.requestedSeats;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is RidePreference &&
+        other.departure == departure &&
+        other.departureDate == departureDate &&
+        other.arrival == arrival &&
+        other.requestedSeats == requestedSeats;
+  }
+
+  @override
+  int get hashCode =>
+      departure.hashCode ^
+      departureDate.hashCode ^
+      arrival.hashCode ^
+      requestedSeats.hashCode;
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:week_3_blabla_project/ui/providers/rides_preferences_provider.dart';
 import 'repository/mock/mock_locations_repository.dart';
 import 'repository/mock/mock_rides_repository.dart';
 import 'service/locations_service.dart';
@@ -24,10 +26,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: appTheme,
-      home: Scaffold(body: RidePrefScreen()),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => RidesPreferencesProvider(
+            repository: MockRidePreferencesRepository(),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: appTheme,
+        home: const Scaffold(body: RidePrefScreen()),
+      ),
     );
   }
 }
